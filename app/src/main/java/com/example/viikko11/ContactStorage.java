@@ -34,7 +34,12 @@ public class ContactStorage {
 
     public void sortByGroup() {
         Collections.sort(contacts, (c1, c2) -> {
-            return c1.getContactGroup().compareToIgnoreCase(c2.getContactGroup());
+            int comparison = c1.getContactGroup().compareToIgnoreCase(c2.getContactGroup());
+
+            if (comparison == 0) {
+                return c1.getFirstName().compareToIgnoreCase(c2.getFirstName());
+            }
+            return comparison;
         });
     }
 }
