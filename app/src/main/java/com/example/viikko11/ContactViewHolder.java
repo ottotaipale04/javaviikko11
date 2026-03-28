@@ -19,9 +19,44 @@ public class ContactViewHolder extends RecyclerView.ViewHolder{
         contactGroup = itemView.findViewById(R.id.ContactGroupText);
         contactDetails = itemView.findViewById(R.id.ContactDetailsButton);
         contactDelete = itemView.findViewById(R.id.ContactDeleteButton);
-        /**
+
         contactNumber.setVisibility(View.GONE);
         contactGroup.setVisibility(View.GONE);
-        */
+
+        contactDetails.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               switchContactDetails();
+           }
+
+        });
+
+        contactDelete.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeContactDetails();
+            }
+        }));
+    }
+
+    public void switchContactDetails() {
+        isVisible = !isVisible;
+
+        if (isVisible) {
+            contactNumber.setVisibility(View.VISIBLE);
+            contactGroup.setVisibility(View.VISIBLE);
+        } else {
+            contactNumber.setVisibility(View.GONE);
+            contactGroup.setVisibility(View.GONE);
+        }
+
+    }
+
+    public void removeContactDetails() {
+        int position = getBindingAdapterPosition();
+        ContactStorage.getInstance().removeContact(position);
+
+        getBindingAdapter().notifyItemRemoved(position);
+        getBindingAdapter().notifyItemRangeChanged(position, getBindingAdapter().getItemCount());
     }
 }
