@@ -1,6 +1,7 @@
 package com.example.viikko11;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ContactStorage {
     ArrayList<Contact> contacts = new ArrayList<>();
@@ -23,5 +24,17 @@ public class ContactStorage {
 
     public void removeContact(int c) {
         contacts.remove(c);
+    }
+
+    public void sortAlphabetically() {
+        Collections.sort(contacts, (c1, c2) -> {
+            return c1.getFirstName().compareToIgnoreCase(c2.getFirstName());
+        });
+    }
+
+    public void sortByGroup() {
+        Collections.sort(contacts, (c1, c2) -> {
+            return c1.getContactGroup().compareToIgnoreCase(c2.getContactGroup());
+        });
     }
 }

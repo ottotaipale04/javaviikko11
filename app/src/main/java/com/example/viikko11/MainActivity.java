@@ -52,4 +52,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddContactActivity.class);
         startActivity(intent);
     }
+
+    public void sortByGroupButton(View view) {
+        ContactStorage.getInstance().sortByGroup();
+
+        adapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(0);
+    }
+
+    public void sortAlphabeticallyButton(View view) {
+        ContactStorage.getInstance().sortAlphabetically();
+
+        adapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(0);
+    }
 }
